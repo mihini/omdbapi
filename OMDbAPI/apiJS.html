@@ -19,15 +19,38 @@
 	<div id="list"></div>
 	
     <script type="text/javascript">
+        var url = "http://www.omdbapi.com/?s=";
         var  list = document.getElementById("list");
         var  input = document.getElementById("input");
         var  button = document.getElementById("search");
         
+        //Steg 1 skapa object
+        var xhttp;
+        if(window.XMLHttpRequest){
+            xhttp = new XMLHttpRequest();
+        }else{
+            xhttp= new ActiveXObject("Microsoft.XMLHttp");
+        }
+        
+        
+        //e.preventDefault ser till att hela sidan inte uppdateras helt utan bara en del.
         button.addEventListener('click', function(e){
             e.preventDefault();
-            console.log("You clicked the button");
+            
+            //steg 2 skapa förfrågan
+            xhttp.open("GET", url + input.value);
+            xhttp.send();
             
         });
+        
+        //steg 3 När server svarar.. så ..
+        xhttp.onreadystatechange = function(){
+            if(xhttp.readyState=== 4 && xhttp.status === 200){
+                var obj = JSON.parse(xhttp.responseText);
+                console.log(obj);
+                
+            }
+        };
     
     </script>
 </body>
