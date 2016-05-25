@@ -49,6 +49,17 @@
                 var obj = JSON.parse(xhttp.responseText);
                 console.log(obj);
                 
+                var items = "";
+                for(var i in obj.Search){
+                    items +="<article>" + 
+                            "<h1>" + obj.Search[i].Title + "</h1>" +
+                            "<p>" + obj.Search[i].Year + "</p>" +
+                            "</article>";
+                    
+                }
+                
+                list.innerHTML = items;
+                
             }
         };
     
